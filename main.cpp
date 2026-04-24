@@ -23,9 +23,7 @@ int main() {
 
 	bool isRunning{ true };
 
-	CPU_render.setPixel(100, 100);
-	CPU_render.setPixel(200, 100);
-	CPU_render.setPixel(300, 100);
+	CPU_render.drawLine(100, 100, 600, 400);
 
 	SDL_Event event;
 	while (isRunning) {

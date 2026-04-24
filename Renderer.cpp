@@ -42,3 +42,25 @@ void Renderer::setPixel(int x, int y) {
 uint32_t* Renderer::getFrameBufferData() {
 	return framebuffer.data();
 }
+
+
+void Renderer::drawLine(int x0, int y0, int x1, int y1) {
+	float distanceX{ static_cast<float>(x1 - x0) };
+	float distanceY{ static_cast<float>(y1 - y0) };
+
+	// Definimos a distância real de um ponto a outro, ideal para podermos desenhar retas 
+	// em qualquer direção
+	float steps{ std::max(std::abs(distanceX), std::abs(distanceY))};
+
+	float Xincrement{ distanceX / steps };
+	float Yincrement{ distanceY / steps };
+
+	float x = x0;
+	float y = y0;
+
+	for (int i{ 0 }; i <= steps; i++) {
+		setPixel(round(x), round(y));
+		x += Xincrement;
+		y += Yincrement;
+	}
+};

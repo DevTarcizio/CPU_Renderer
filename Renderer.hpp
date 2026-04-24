@@ -1,15 +1,21 @@
 #pragma once
 #include <iostream>
 #include <vector>
+#include <cmath>
+#include <algorithm>
 
 class Renderer {
 
 
 public:
 	Renderer();
+	
 	uint32_t getPixel(int x, int y);
 	void setPixel(int x, int y);
+
 	uint32_t* getFrameBufferData();
+	void drawLine(int x0, int y0, int x1, int y1);
+
 
 private:
 	const int width{ 800 };
