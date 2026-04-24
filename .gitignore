@@ -1,3 +1,7 @@
+# ========================
+# C++ (geral)
+# ========================
+
 # Prerequisites
 *.d
 
@@ -22,13 +26,7 @@
 *.dylib
 *.dll
 
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
+# Static libraries
 *.a
 *.lib
 
@@ -37,5 +35,42 @@
 *.out
 *.app
 
-# debug information files
+# Debug info
 *.dwo
+
+# ========================
+# Visual Studio
+# ========================
+
+# Pasta do VS (CACHE - NÃO versionar)
+.vs/
+
+# Arquivos de usuário
+*.user
+*.suo
+
+# Pastas de build
+Debug/
+Release/
+x64/
+x86/
+out/
+build/
+
+# CMake (se você usar depois)
+CMakeFiles/
+CMakeCache.txt
+cmake-build-*/
+
+# ========================
+# Logs / temporários
+# ========================
+*.log
+*.tmp
+*.cache
+
+# ========================
+# Sistema operacional
+# ========================
+.DS_Store
+Thumbs.db
