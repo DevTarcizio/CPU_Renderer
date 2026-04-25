@@ -12,6 +12,10 @@ struct vec2i {
 	bool operator==(const vec2i& other) const {
 		return x == other.x && y == other.y;
 	};
+	
+	bool operator!=(const vec2i& other) const {
+		return x != other.x || y != other.y;
+	};
 
 	vec2i operator+(const vec2i& other) const {
 		return { x + other.x, y + other.y };
