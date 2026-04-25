@@ -1,4 +1,5 @@
 #pragma once
+#include "math/vec2.hpp"
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -10,11 +11,18 @@ class Renderer {
 public:
 	Renderer();
 	
-	uint32_t getPixel(int x, int y);
-	void setPixel(int x, int y);
+	// Retorna se o pixel está ligado, ou desligado
+	uint32_t getPixel(vec2i cords);
 
+	// Um toggle para ativar/desativar os pixels
+	void setPixel(vec2i cords);
+
+
+	// Retorna os dados do framebuffer
 	uint32_t* getFrameBufferData();
-	void drawLine(int x0, int y0, int x1, int y1);
+
+	// Desenha uma linha a partir de 2 pares de coordenadas
+	void drawLine(vec2i initial_point, vec2i final_point);
 
 
 private:

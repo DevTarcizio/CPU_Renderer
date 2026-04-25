@@ -23,7 +23,7 @@ int main() {
 
 	bool isRunning{ true };
 
-	CPU_render.drawLine(100, 100, 600, 400);
+	CPU_render.drawLine({ 0, 0 }, { 0, 0 });
 
 	SDL_Event event;
 	while (isRunning) {
