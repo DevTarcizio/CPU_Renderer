@@ -131,12 +131,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="math\utils.cpp" />
     <ClCompile Include="Renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Libraries\SDL3\lib\x64\SDL3.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="math\utils.hpp" />
     <ClInclude Include="math\vec2.hpp" />
     <ClInclude Include="Renderer.hpp" />
   </ItemGroup>

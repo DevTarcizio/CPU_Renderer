@@ -1,5 +1,6 @@
 #pragma once
 #include "math/vec2.hpp"
+#include "math/utils.hpp"
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -14,16 +15,20 @@ public:
 	// Retorna se o pixel está ligado, ou desligado
 	uint32_t getPixel(vec2i cords);
 
+	// Verifica se o ponto dado está dentro da tela
+	bool isInsideScreen(vec2i point) const;
+
 	// Um toggle para ativar/desativar os pixels
-	void setPixel(vec2i cords);
+	void togglePixel(vec2i cords);
 
-
-	// Retorna os dados do framebuffer
+	// Ligam e desligam os pixels, usadas principalmente para desenhar na tela
+	void setOnPixel(vec2i cords);
+	void setOffPixel(vec2i cords);
+	
 	uint32_t* getFrameBufferData();
-
-	// Desenha uma linha a partir de 2 pares de coordenadas
 	void drawLine(vec2i initial_point, vec2i final_point);
-
+	void drawTriangle(vec2i v0, vec2i v1, vec2i v2);
+	void drawFilledTriangle(vec2i v0, vec2i v1, vec2i v2);
 
 private:
 	const int width{ 800 };

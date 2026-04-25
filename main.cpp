@@ -23,7 +23,11 @@ int main() {
 
 	bool isRunning{ true };
 
-	CPU_render.drawLine({ 0, 0 }, { 0, 0 });
+	vec2i v0{ 400, 200 };
+	vec2i v1{ 150, 500 };
+	vec2i v2{ 650, 500 };
+
+	CPU_render.drawFilledTriangle(v0, v1, v2);
 
 	SDL_Event event;
 	while (isRunning) {
