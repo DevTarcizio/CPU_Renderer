@@ -3,6 +3,9 @@
 
 
 int main() {
+	const int width{ 1920 };
+	const int height{ 991 };
+	
 	Renderer CPU_render;
 	uint32_t currentColor{ CPU_render.toRGBA(Renderer::Color::Green) };
 
@@ -12,14 +15,14 @@ int main() {
 	};
 
 	SDL_Window* window;
-	window = SDL_CreateWindow("CPU Renderer", 800, 600, SDL_WINDOW_RESIZABLE);
+	window = SDL_CreateWindow("CPU Renderer", width, height, SDL_WINDOW_RESIZABLE | SDL_WINDOW_MAXIMIZED);
 	
 	SDL_Renderer* render;
 	render = SDL_CreateRenderer(window, 0);
 
 	SDL_Texture* texture;
 	// Usando pixelformat ABGR pois assim ele usa como RGBA
-	texture = SDL_CreateTexture(render, SDL_PIXELFORMAT_ABGR32, SDL_TEXTUREACCESS_STREAMING, 800, 600);
+	texture = SDL_CreateTexture(render, SDL_PIXELFORMAT_ABGR32, SDL_TEXTUREACCESS_STREAMING, width, height);
 
 
 	bool isRunning{ true };
@@ -27,7 +30,6 @@ int main() {
 	vec2i v0{ 400, 200 };
 	vec2i v1{ 150, 500 };
 	vec2i v2{ 650, 500 };
-
 
 	SDL_Event event;
 	while (isRunning) {
@@ -39,8 +41,8 @@ int main() {
 		}
 
 		CPU_render.drawFilledTriangle(v0, v1, v2, currentColor);
-
-		SDL_UpdateTexture(texture, nullptr, CPU_render.getFrameBufferData(), 800 * sizeof(uint32_t));
+		
+		SDL_UpdateTexture(texture, nullptr, CPU_render.getFrameBufferData(), width * sizeof(uint32_t));
 
 		SDL_RenderClear(render);
 		SDL_RenderTexture(render, texture, nullptr, nullptr);

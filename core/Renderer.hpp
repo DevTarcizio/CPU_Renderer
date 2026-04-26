@@ -1,6 +1,7 @@
 #pragma once
 #include "../math/vec2.hpp"
 #include "../math/utils.hpp"
+#include "types.hpp"
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -44,8 +45,8 @@ public:
 	void drawFilledTriangle(vec2i v0, vec2i v1, vec2i v2, uint32_t color);
 
 private:
-	const int width{ 800 };
-	const int height{ 600 };
+	const int width{ 1920 };
+	const int height{ 991 };
 
 	// Vetor de pixels com coordenadas (x, y), mesmo com apenas uma dimensão, na qual cada coordenada
 	// é acessada pelo índice, dado pela formula: indice = y * width + x
