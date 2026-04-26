@@ -1,6 +1,6 @@
 #pragma once
-#include "math/vec2.hpp"
-#include "math/utils.hpp"
+#include "../math/vec2.hpp"
+#include "../math/utils.hpp"
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -12,6 +12,17 @@ class Renderer {
 public:
 	Renderer();
 	
+	enum class Color {
+		Red,
+		Green,
+		Blue,
+		Black,
+		White,
+	};
+
+	// Converte do enum para hexadecimal
+	uint32_t toRGBA(Color color);
+
 	// Retorna se o pixel está ligado, ou desligado
 	uint32_t getPixel(vec2i cords);
 
@@ -23,12 +34,14 @@ public:
 
 	// Ligam e desligam os pixels, usadas principalmente para desenhar na tela
 	void setOnPixel(vec2i cords);
+	void setOnPixel(vec2i cords, uint32_t color);
 	void setOffPixel(vec2i cords);
 	
 	uint32_t* getFrameBufferData();
 	void drawLine(vec2i initial_point, vec2i final_point);
 	void drawTriangle(vec2i v0, vec2i v1, vec2i v2);
 	void drawFilledTriangle(vec2i v0, vec2i v1, vec2i v2);
+	void drawFilledTriangle(vec2i v0, vec2i v1, vec2i v2, uint32_t color);
 
 private:
 	const int width{ 800 };

@@ -16,6 +16,18 @@ bool Renderer::isInsideScreen(vec2i point) const
 	return true;
 }
 
+uint32_t Renderer::toRGBA(Color color) {
+	switch (color) {
+
+	case Color::Red: return 0xFF0000FF;
+	case Color::Green: return 0x00FF00FF;
+	case Color::Blue: return 0x0000FFFF;
+	case Color::Black: return 0x000000FF;
+	case Color::White: return 0xFFFFFFFFF;
+	}
+	return 0xFFFFFFFF;
+}
+
 uint32_t Renderer::getPixel(vec2i cords) {
 	if (!isInsideScreen(cords)) {
 		std::cout << "Ponto fora da tela!\n";
@@ -53,6 +65,18 @@ void Renderer::setOnPixel(vec2i cords){
 	int index{ (cords.y * width) + cords.x };
 
 	framebuffer[index] = 0xFFFFFFFF;
+}
+
+void Renderer::setOnPixel(vec2i cords, uint32_t color) {
+	if (!isInsideScreen(cords)) {
+		std::cout << "Ponto fora da tela!\n";
+		return;
+	}
+
+	int index{ (cords.y * width) + cords.x };
+
+	framebuffer[index] = color;
+
 }
 
 void Renderer::setOffPixel(vec2i cords) {
@@ -126,6 +150,27 @@ void Renderer::drawFilledTriangle(vec2i v0, vec2i v1, vec2i v2) {
 
 			if (a1 >= 0 && a2 >= 0 && a3 >= 0 || a1 <= 0 && a2 <= 0 && a3 <= 0) {
 				setOnPixel(p);
+			}
+		}
+	}
+}
+void Renderer::drawFilledTriangle(vec2i v0, vec2i v1, vec2i v2, uint32_t color) {
+	int minX = std::min(v0.x, std::min(v1.x, v2.x));
+	int maxX = std::max(v0.x, std::max(v1.x, v2.x));
+
+	int minY = std::min(v0.y, std::min(v1.y, v2.y));
+	int maxY = std::max(v0.y, std::max(v1.y, v2.y));
+
+	for (int i{ minX }; i <= maxX; i++) {
+		for (int j{ minY }; j <= maxY; j++) {
+			vec2i p{ i, j };
+
+			int64_t a1 = math::crossProduct(v0, v1, p);
+			int64_t a2 = math::crossProduct(v1, v2, p);
+			int64_t a3 = math::crossProduct(v2, v0, p);
+
+			if ((a1 >= 0 && a2 >= 0 && a3 >= 0) || (a1 <= 0 && a2 <= 0 && a3 <= 0)) {
+				setOnPixel(p, color);
 			}
 		}
 	}

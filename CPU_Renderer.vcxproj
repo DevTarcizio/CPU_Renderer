@@ -130,17 +130,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="core\Renderer.cpp" />
     <ClCompile Include="math\utils.cpp" />
-    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Libraries\SDL3\lib\x64\SDL3.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="core\Renderer.hpp" />
     <ClInclude Include="math\utils.hpp" />
     <ClInclude Include="math\vec2.hpp" />
-    <ClInclude Include="Renderer.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

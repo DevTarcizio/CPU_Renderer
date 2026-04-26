@@ -1,10 +1,10 @@
 #include <SDL3/SDL.h>
-#include "Renderer.hpp"
+#include "../core/Renderer.hpp"
 
 
 int main() {
 	Renderer CPU_render;
-
+	uint32_t currentColor{ CPU_render.toRGBA(Renderer::Color::Green) };
 
 	if (!SDL_Init(SDL_INIT_VIDEO)) {
 		SDL_Log("failed");
@@ -18,7 +18,8 @@ int main() {
 	render = SDL_CreateRenderer(window, 0);
 
 	SDL_Texture* texture;
-	texture = SDL_CreateTexture(render, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_STREAMING, 800, 600);
+	// Usando pixelformat ABGR pois assim ele usa como RGBA
+	texture = SDL_CreateTexture(render, SDL_PIXELFORMAT_ABGR32, SDL_TEXTUREACCESS_STREAMING, 800, 600);
 
 
 	bool isRunning{ true };
@@ -27,7 +28,6 @@ int main() {
 	vec2i v1{ 150, 500 };
 	vec2i v2{ 650, 500 };
 
-	CPU_render.drawFilledTriangle(v0, v1, v2);
 
 	SDL_Event event;
 	while (isRunning) {
@@ -38,8 +38,7 @@ int main() {
 
 		}
 
-		
-
+		CPU_render.drawFilledTriangle(v0, v1, v2, currentColor);
 
 		SDL_UpdateTexture(texture, nullptr, CPU_render.getFrameBufferData(), 800 * sizeof(uint32_t));
 
