@@ -1,6 +1,7 @@
 #pragma once
 #include "../math/vec2.hpp"
 #include "../math/utils.hpp"
+#include "vertexStage.hpp"
 #include "types.hpp"
 #include <iostream>
 #include <vector>
@@ -36,13 +37,18 @@ public:
 	// Ligam e desligam os pixels, usadas principalmente para desenhar na tela
 	void setOnPixel(vec2i cords);
 	void setOnPixel(vec2i cords, uint32_t color);
+	void setOnPixel(vertex v);
 	void setOffPixel(vec2i cords);
 	
 	uint32_t* getFrameBufferData();
 	void drawLine(vec2i initial_point, vec2i final_point);
+	void drawLine(vertexNDC initial_point, vertexNDC final_point);
 	void drawTriangle(vec2i v0, vec2i v1, vec2i v2);
+	void drawTriangle(vertexNDC v0, vertexNDC v1, vertexNDC v2);
 	void drawFilledTriangle(vec2i v0, vec2i v1, vec2i v2);
 	void drawFilledTriangle(vec2i v0, vec2i v1, vec2i v2, uint32_t color);
+	void drawFilledTriangle(vertexNDC v0, vertexNDC v1, vertexNDC v2);
+	void drawFilledTriangle(vertexNDC v0, vertexNDC v1, vertexNDC v2, uint32_t color);
 
 private:
 	const int width{ 1920 };
@@ -52,4 +58,7 @@ private:
 	// é acessada pelo índice, dado pela formula: indice = y * width + x
 	// Definido o espaço apenas no construtor devido a ambiguidade do C
 	std::vector<uint32_t> framebuffer;
+
+	// Classes da Pipeline
+	VertexStage vertexStage;
 };
