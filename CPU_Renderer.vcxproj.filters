@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="math\utils.cpp">
+    <ClCompile Include="math\math.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="src\main.cpp">
@@ -32,19 +32,22 @@
     <None Include="..\..\Libraries\SDL3\lib\x64\SDL3.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="math\vec2.hpp">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="math\utils.hpp">
+    <ClInclude Include="math\math.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="core\Renderer.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="core\types.hpp">
+    <ClInclude Include="core\vertexStage.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="core\vertexStage.hpp">
+    <ClInclude Include="types\vec2.hpp">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="types\vertex.hpp">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="types\mat3.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
   </ItemGroup>

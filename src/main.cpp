@@ -27,9 +27,9 @@ int main() {
 
 	bool isRunning{ true };
 
-	vec2i v0{ 400, 200 };
-	vec2i v1{ 150, 500 };
-	vec2i v2{ 650, 500 };
+	vertexNDC v1 = { 0, 0.8 };
+	vertexNDC v2 = { -0.7, -0.8 };
+	vertexNDC v3 = { 0.7, -0.8 };
 
 	SDL_Event event;
 	while (isRunning) {
@@ -39,11 +39,9 @@ int main() {
 			}
 
 		}
-		vertexNDC v1 = { 0, 0.8 };
-		vertexNDC v2 = { -0.7, -0.8 };
-		vertexNDC v3 = { 0.7, -0.8 };
 
-		CPU_render.drawFilledTriangle(v1, v2, v3, currentColor);
+		CPU_render.drawTriangle(v1, v2, v3);
+
 		
 		SDL_UpdateTexture(texture, nullptr, CPU_render.getFrameBufferData(), width * sizeof(uint32_t));
 

@@ -132,7 +132,7 @@
   <ItemGroup>
     <ClCompile Include="core\Renderer.cpp" />
     <ClCompile Include="core\vertexStage.cpp" />
-    <ClCompile Include="math\utils.cpp" />
+    <ClCompile Include="math\math.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -140,10 +140,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\Renderer.hpp" />
-    <ClInclude Include="core\types.hpp" />
     <ClInclude Include="core\vertexStage.hpp" />
-    <ClInclude Include="math\utils.hpp" />
-    <ClInclude Include="math\vec2.hpp" />
+    <ClInclude Include="math\math.hpp" />
+    <ClInclude Include="types\mat3.hpp" />
+    <ClInclude Include="types\vec2.hpp" />
+    <ClInclude Include="types\vertex.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

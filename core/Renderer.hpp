@@ -1,8 +1,8 @@
 #pragma once
-#include "../math/vec2.hpp"
-#include "../math/utils.hpp"
+#include "../types/vec2.hpp"
+#include "../math/math.hpp"
+#include "../types/vertex.hpp"
 #include "vertexStage.hpp"
-#include "types.hpp"
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -41,12 +41,8 @@ public:
 	void setOffPixel(vec2i cords);
 	
 	uint32_t* getFrameBufferData();
-	void drawLine(vec2i initial_point, vec2i final_point);
 	void drawLine(vertexNDC initial_point, vertexNDC final_point);
-	void drawTriangle(vec2i v0, vec2i v1, vec2i v2);
 	void drawTriangle(vertexNDC v0, vertexNDC v1, vertexNDC v2);
-	void drawFilledTriangle(vec2i v0, vec2i v1, vec2i v2);
-	void drawFilledTriangle(vec2i v0, vec2i v1, vec2i v2, uint32_t color);
 	void drawFilledTriangle(vertexNDC v0, vertexNDC v1, vertexNDC v2);
 	void drawFilledTriangle(vertexNDC v0, vertexNDC v1, vertexNDC v2, uint32_t color);
 

@@ -1,6 +1,6 @@
 #pragma once
-#include "types.hpp"
-#include "../math/vec2.hpp"
+#include "../types/vertex.hpp"
+#include "../types/vec2.hpp"
 
 class VertexStage {
 public:

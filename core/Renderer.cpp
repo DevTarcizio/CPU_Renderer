@@ -23,7 +23,7 @@ uint32_t Renderer::toRGBA(Color color) {
 	case Color::Green: return 0x00FF00FF;
 	case Color::Blue: return 0x0000FFFF;
 	case Color::Black: return 0x000000FF;
-	case Color::White: return 0xFFFFFFFFF;
+	case Color::White: return 0xFFFFFFFF;
 	}
 	return 0xFFFFFFFF;
 }
@@ -105,36 +105,6 @@ uint32_t* Renderer::getFrameBufferData() {
 	return framebuffer.data();
 }
 
-void Renderer::drawLine(vec2i initial_point, vec2i final_point) {
-	float distanceX{ static_cast<float>(final_point.x - initial_point.x) };
-	float distanceY{ static_cast<float>(final_point.y - initial_point.y) };
-
-	// Definimos a distância real de um ponto a outro, ideal para podermos desenhar retas 
-	// em qualquer direção
-	float steps{ std::max(std::abs(distanceX), std::abs(distanceY)) };
-
-	if (initial_point == final_point) {
-		setOnPixel(initial_point);
-		steps = 0;
-		return;
-	}
-
-
-	// Define o quanto andar em X e em Y
-	float Xincrement{ distanceX / steps };
-	float Yincrement{ distanceY / steps };
-
-	vec2f cords{ initial_point.x, initial_point.y };
-
-	for (int i{ 0 }; i <= steps; i++) {
-		// O método round arrendonda 
-		vec2i newCords{ round(cords.x), round(cords.y) };
-		setOnPixel(newCords);
-		cords.x += Xincrement;
-		cords.y += Yincrement;
-	}
-}
-
 void Renderer::drawLine(vertexNDC initial_point, vertexNDC final_point) {
 	vertex initial_p = vertexStage.process(initial_point);
 	vertex final_p = vertexStage.process(final_point);
@@ -162,19 +132,13 @@ void Renderer::drawLine(vertexNDC initial_point, vertexNDC final_point) {
 
 	for (int i{ 0 }; i <= steps; i++) {
 		// O método round arrendonda 
-		vec2i newCords{ round(cords.x), round(cords.y) };
-		setOnPixel(newCords);
+		vertex newCords{ round(cords.x), round(cords.y) };
+		setOnPixel(newCords.position);
 		cords.x += Xincrement;
 		cords.y += Yincrement;
 	}
 }
 
-
-void Renderer::drawTriangle(vec2i v0, vec2i v1, vec2i v2) {
-	drawLine(v0, v1);
-	drawLine(v0, v2);
-	drawLine(v1, v2);
-}
 
 void Renderer::drawTriangle(vertexNDC v0, vertexNDC v1, vertexNDC v2) {
 	drawLine(v0, v1);
@@ -182,49 +146,6 @@ void Renderer::drawTriangle(vertexNDC v0, vertexNDC v1, vertexNDC v2) {
 	drawLine(v2, v1);
 }
 
-
-void Renderer::drawFilledTriangle(vec2i v0, vec2i v1, vec2i v2) {
-	int minX = std::min(v0.x, std::min(v1.x, v2.x));
-	int maxX = std::max(v0.x, std::max(v1.x, v2.x));
-
-	int minY = std::min(v0.y, std::min(v1.y, v2.y));
-	int maxY = std::max(v0.y, std::max(v1.y, v2.y));
-
-	for (int i{ minX }; i <= maxX; i++) {
-		for (int j{ minY }; j <= maxY; j++) {
-			vec2i p{ i, j };
-
-			int a1 = math::crossProduct(v0, v1, p);
-			int a2 = math::crossProduct(v1, v2, p);
-			int a3 = math::crossProduct(v2, v0, p);
-
-			if (a1 >= 0 && a2 >= 0 && a3 >= 0 || a1 <= 0 && a2 <= 0 && a3 <= 0) {
-				setOnPixel(p);
-			}
-		}
-	}
-}
-void Renderer::drawFilledTriangle(vec2i v0, vec2i v1, vec2i v2, uint32_t color) {
-	int minX = std::min(v0.x, std::min(v1.x, v2.x));
-	int maxX = std::max(v0.x, std::max(v1.x, v2.x));
-
-	int minY = std::min(v0.y, std::min(v1.y, v2.y));
-	int maxY = std::max(v0.y, std::max(v1.y, v2.y));
-
-	for (int i{ minX }; i <= maxX; i++) {
-		for (int j{ minY }; j <= maxY; j++) {
-			vec2i p{ i, j };
-
-			int64_t a1 = math::crossProduct(v0, v1, p);
-			int64_t a2 = math::crossProduct(v1, v2, p);
-			int64_t a3 = math::crossProduct(v2, v0, p);
-
-			if ((a1 >= 0 && a2 >= 0 && a3 >= 0) || (a1 <= 0 && a2 <= 0 && a3 <= 0)) {
-				setOnPixel(p, color);
-			}
-		}
-	}
-}
 void Renderer::drawFilledTriangle(vertexNDC v0, vertexNDC v1, vertexNDC v2) {
 	vertex p0 = vertexStage.process(v0);
 	vertex p1 = vertexStage.process(v1);
