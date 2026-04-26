@@ -3,10 +3,10 @@
 #include "../math/math.hpp"
 #include "../types/vertex.hpp"
 #include "vertexStage.hpp"
+#include "rasterizer.hpp"
 #include <iostream>
 #include <vector>
 #include <cmath>
-#include <algorithm>
 
 class Renderer {
 
@@ -57,4 +57,5 @@ private:
 
 	// Classes da Pipeline
 	VertexStage vertexStage;
+	Rasterizer rasterizer;
 };

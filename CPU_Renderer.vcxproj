@@ -130,6 +130,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="core\rasterizer.cpp" />
     <ClCompile Include="core\Renderer.cpp" />
     <ClCompile Include="core\vertexStage.cpp" />
     <ClCompile Include="math\math.cpp" />
@@ -139,6 +140,7 @@
     <None Include="..\..\Libraries\SDL3\lib\x64\SDL3.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="core\rasterizer.hpp" />
     <ClInclude Include="core\Renderer.hpp" />
     <ClInclude Include="core\vertexStage.hpp" />
     <ClInclude Include="math\math.hpp" />

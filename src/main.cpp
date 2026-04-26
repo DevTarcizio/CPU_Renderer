@@ -40,8 +40,7 @@ int main() {
 
 		}
 
-		CPU_render.drawTriangle(v1, v2, v3);
-
+		CPU_render.drawFilledTriangle(v1, v2, v3, currentColor);	
 		
 		SDL_UpdateTexture(texture, nullptr, CPU_render.getFrameBufferData(), width * sizeof(uint32_t));
 

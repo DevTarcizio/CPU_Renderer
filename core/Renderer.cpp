@@ -151,25 +151,7 @@ void Renderer::drawFilledTriangle(vertexNDC v0, vertexNDC v1, vertexNDC v2) {
 	vertex p1 = vertexStage.process(v1);
 	vertex p2 = vertexStage.process(v2);
 
-	int minX = std::min(p0.position.x, std::min(p1.position.x, p2.position.x));
-	int maxX = std::max(p0.position.x, std::max(p1.position.x, p2.position.x));
-
-	int minY = std::min(p0.position.y, std::min(p1.position.y, p2.position.y));
-	int maxY = std::max(p0.position.y, std::max(p1.position.y, p2.position.y));
-
-	for (int i{ minX }; i <= maxX; i++) {
-		for (int j{ minY }; j <= maxY; j++) {
-			vec2i p{ i, j };
-
-			int64_t a1 = math::crossProduct(p0.position, p1.position, p);
-			int64_t a2 = math::crossProduct(p1.position, p2.position, p);
-			int64_t a3 = math::crossProduct(p2.position, p0.position, p);
-
-			if ((a1 >= 0 && a2 >= 0 && a3 >= 0) || (a1 <= 0 && a2 <= 0 && a3 <= 0)) {
-				setOnPixel(p);
-			}
-		}
-	}
+	rasterizer.rasterizerTriangle(p0, p1, p2, *this);
 }
 
 void Renderer::drawFilledTriangle(vertexNDC v0, vertexNDC v1, vertexNDC v2, uint32_t color) {
@@ -177,24 +159,6 @@ void Renderer::drawFilledTriangle(vertexNDC v0, vertexNDC v1, vertexNDC v2, uint
 	vertex p1 = vertexStage.process(v1);
 	vertex p2 = vertexStage.process(v2);
 
-	int minX = std::min(p0.position.x, std::min(p1.position.x, p2.position.x));
-	int maxX = std::max(p0.position.x, std::max(p1.position.x, p2.position.x));
-
-	int minY = std::min(p0.position.y, std::min(p1.position.y, p2.position.y));
-	int maxY = std::max(p0.position.y, std::max(p1.position.y, p2.position.y));
-
-	for (int i{ minX }; i <= maxX; i++) {
-		for (int j{ minY }; j <= maxY; j++) {
-			vec2i p{ i, j };
-
-			int64_t a1 = math::crossProduct(p0.position, p1.position, p);
-			int64_t a2 = math::crossProduct(p1.position, p2.position, p);
-			int64_t a3 = math::crossProduct(p2.position, p0.position, p);
-
-			if ((a1 >= 0 && a2 >= 0 && a3 >= 0) || (a1 <= 0 && a2 <= 0 && a3 <= 0)) {
-				setOnPixel(p, color);
-			}
-		}
-	}
+	rasterizer.rasterizerTriangle(p0, p1, p2, color, *this);
 }
 ;
